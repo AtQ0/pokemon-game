@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  flex: 1;
+}
+
+/* Pulsing animation of logotypes in Slider */
+@layer utilities {
+  @keyframes pulseFade {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    25% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    75% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  .animate-pulseFade {
+    animation: pulseFade 6s ease-in-out forwards;
+    animation-iteration-count: 1;
+  }
+}
+
+/* Sliding animation of Slider */
+@layer utilities {
+  @keyframes slideDownFadeOut {
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  .animate-slideDownFadeOut {
+    animation: slideDownFadeOut 1s ease-in forwards;
+    animation-delay: 6s;
+    /* Delay slide down until pulseFade finishes */
+  }
+}
