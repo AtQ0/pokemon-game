@@ -17,6 +17,8 @@ pnpm dev
 # or
 bun dev
 
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
@@ -41,6 +43,7 @@ If you haven't already, clone this GitHub repository to your local machine:
 ```bash
 git clone https://github.com/AtQ0/pokemon-game.git
 cd pokemon-game
+```
 
 ## Build and Run with Docker Compose
 
@@ -48,6 +51,8 @@ Once you are in the project's root directory (where the `docker-compose.yml` and
 
 ```bash
 docker-compose up --build
+
+```
 
 `docker-compose up`: Starts the services defined in `docker-compose.yml`.
 
@@ -70,6 +75,7 @@ To stop and remove the containers, networks, and volumes created by `up`, run:
 
 ```bash
 docker-compose down
+```
 
 ## Learn More
 

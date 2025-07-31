@@ -246,7 +246,7 @@ function BattlePageContent() {
                         })}
 
                         {/* Battle Button */}
-                        <div className="absolute bottom-76 left-1/2 transform -translate-x-1/2 z-30">
+                        <div className="absolute bottom-66 left-1/2 transform -translate-x-1/2 z-30">
                             <button
                                 onClick={handleStartBattle}
                                 disabled={loading || battleEnded}
