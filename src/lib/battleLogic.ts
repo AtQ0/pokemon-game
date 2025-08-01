@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 
 export interface Pokemon {
     id: number;
@@ -10,9 +11,11 @@ export interface Pokemon {
     weight: string;
     spawn_chance?: number;
     multipliers?: number[] | null;
+    baseHp: number;  // <-- added baseHp here
 }
 
 export interface Battler extends Pokemon {
+    instanceId: string;  // Unique ID for each battler instance
     hp: number;
     maxHp: number;
     defense: number;
@@ -136,8 +139,8 @@ export function runOneTurn(
             const heightM = parseStat(p.height, "m");
             return {
                 ...p,
-                hp: 100,
-                maxHp: 100,
+                hp: p.baseHp || 100,
+                maxHp: p.baseHp || 100,
                 defense: 6 + Math.floor(Math.random() * 6),
                 critChance: 0.2,
                 missChance: 0.08,
@@ -153,6 +156,7 @@ export function runOneTurn(
                             : 1.0
                     : 1.0,
                 powerMultiplier: p.multipliers ? Math.max(...p.multipliers) : 1.0,
+                instanceId: uuidv4(),  // Added unique instance ID
             };
         };
 

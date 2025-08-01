@@ -9,6 +9,7 @@ interface Pokemon {
   id: number;
   name: string;
   img: string;
+  uniqueId?: number; // added optional for duplicates
 }
 
 export default function Home() {
@@ -96,8 +97,10 @@ export default function Home() {
         items={pokemonList}
         battleMode={battleMode}
         onFight={(selected) => {
-          // Redirect with IDs in query string
-          const ids = selected.map((p) => p.id).join(',');
+          // Include uniqueId so duplicates remain unique and redirect
+          const ids = selected
+            .map((p) => `${p.id}-${p.uniqueId}`)
+            .join(',');
           router.push(`/battle?team=${ids}`);
         }}
         header="Select Your Pokémon"

@@ -16,7 +16,7 @@ interface ChosenPokemon extends Pokemon {
 
 interface DataListWithAddProps {
     items: Pokemon[];
-    onFight: (selectedItems: Pokemon[]) => void;
+    onFight: (selectedItems: ChosenPokemon[]) => void; // keep uniqueId
     header?: string;
     battleMode: 'single' | 'team';
 }
@@ -57,12 +57,8 @@ export default function DataListWithAdd({
     };
 
     const handleFight = () => {
-
-        const fight = chosen.map((item) => {
-            const { uniqueId, ...rest } = item; // eslint-disable-line @typescript-eslint/no-unused-vars
-            return rest;
-        });
-        onFight(fight);
+        // send chosen with uniqueId
+        onFight(chosen);
     };
 
     return (
@@ -80,8 +76,8 @@ export default function DataListWithAdd({
                                     key={item.id}
                                     onClick={() => setSelected(item)}
                                     className={`relative w-16 h-16 cursor-pointer rounded-lg border-2 overflow-hidden p-1 transition-colors ${selected?.id === item.id
-                                        ? 'bg-[#A6CDE1] border-[#EE1515]'
-                                        : 'hover:bg-[#D4EAC9] border-transparent'
+                                            ? 'bg-[#A6CDE1] border-[#EE1515]'
+                                            : 'hover:bg-[#D4EAC9] border-transparent'
                                         }`}
                                 >
                                     <img
@@ -120,8 +116,8 @@ export default function DataListWithAdd({
                     onClick={handleAdd}
                     disabled={!selected || chosen.length >= maxAllowed}
                     className={`p-2 rounded-full transition-colors ${selected && chosen.length < maxAllowed
-                        ? 'bg-[#EE1515] text-white hover:bg-[#B01010] cursor-pointer'
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                            ? 'bg-[#EE1515] text-white hover:bg-[#B01010] cursor-pointer'
+                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                         }`}
                     aria-label="Add selected Pokémon"
                     title={chosen.length >= maxAllowed ? `Max ${maxAllowed} Pokémon allowed` : undefined}
@@ -133,8 +129,8 @@ export default function DataListWithAdd({
                     onClick={handleRemove}
                     disabled={!selectedInTeam}
                     className={`p-2 rounded-full transition-colors ${selectedInTeam
-                        ? 'bg-[#EE1515] text-white hover:bg-[#B01010] cursor-pointer'
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                            ? 'bg-[#EE1515] text-white hover:bg-[#B01010] cursor-pointer'
+                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                         }`}
                     aria-label="Remove selected Pokémon"
                 >
@@ -154,8 +150,8 @@ export default function DataListWithAdd({
                                     setSelectedInTeam(selectedInTeam?.uniqueId === item.uniqueId ? null : item)
                                 }
                                 className={`relative w-16 h-16 cursor-pointer rounded-lg border-2 overflow-hidden p-1 transition-colors ${selectedInTeam?.uniqueId === item.uniqueId
-                                    ? 'bg-[#A6CDE1] border-[#EE1515]'
-                                    : 'hover:bg-[#D4EAC9] border-transparent'
+                                        ? 'bg-[#A6CDE1] border-[#EE1515]'
+                                        : 'hover:bg-[#D4EAC9] border-transparent'
                                     }`}
                             >
                                 <img
@@ -182,8 +178,8 @@ export default function DataListWithAdd({
                         (battleMode === 'team' && chosen.length !== 3)
                     }
                     className={`w-full max-w-[300px] text-white ${chosen.length === (battleMode === 'single' ? 1 : 3)
-                        ? 'bg-[#EE1515] hover:bg-[#B01010]'
-                        : 'bg-gray-300 cursor-not-allowed'
+                            ? 'bg-[#EE1515] hover:bg-[#B01010]'
+                            : 'bg-gray-300 cursor-not-allowed'
                         }`}
                     useIsActiveStyle={false}
                 />
