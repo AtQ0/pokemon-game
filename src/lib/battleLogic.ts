@@ -11,11 +11,11 @@ export interface Pokemon {
     weight: string;
     spawn_chance?: number;
     multipliers?: number[] | null;
-    baseHp: number;  // <-- added baseHp here
+    baseHp: number;
 }
 
 export interface Battler extends Pokemon {
-    instanceId: string;  // Unique ID for each battler instance
+    instanceId: string;
     hp: number;
     maxHp: number;
     defense: number;
